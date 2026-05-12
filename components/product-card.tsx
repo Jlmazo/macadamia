@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 import { Plus, Check, ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { formatPrice, type Product } from "@/lib/products";
@@ -23,6 +25,25 @@ export function ProductCard({ product }: ProductCardProps) {
     addToCart(product);
     setJustAdded(true);
     setTimeout(() => setJustAdded(false), 1000);
+
+    void Swal.fire({
+      toast: true,
+      position: "top-end",
+      icon: "success",
+      title: "Agregado al carrito",
+      text: product.name,
+      showConfirmButton: false,
+      timer: 1800,
+      timerProgressBar: true,
+      background: "#ffffff",
+      color: "#171717",
+      iconColor: "#C470A7",
+      customClass: {
+        popup: "macadamia-alert",
+        title: "macadamia-alert-title",
+        timerProgressBar: "macadamia-alert-progress",
+      },
+    });
   };
 
   return (

@@ -77,7 +77,7 @@ export function Header() {
               <ShoppingCart className="relative size-5 transition-transform duration-300 group-hover:scale-110" />
               <span className="relative hidden text-sm font-bold sm:inline">Carrito</span>
               {totalItems > 0 && (
-                <span className="absolute -right-1 -top-1 grid min-h-5 min-w-5 place-items-center rounded-full bg-[#ff7043] px-1.5 text-xs font-black leading-none text-white ring-2 ring-white">
+                <span className="relative grid min-h-5 min-w-5 place-items-center rounded-full bg-white/16 px-1.5 text-xs font-black leading-none text-white ring-1 ring-white/30">
                   {totalItems}
                 </span>
               )}

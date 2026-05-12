@@ -121,3 +121,20 @@
     animation: cart-attention 20s ease-in-out infinite;
   }
 }
+
+.macadamia-alert {
+  border: 1px solid rgba(196, 112, 167, 0.18);
+  border-radius: 16px;
+  box-shadow: 0 18px 45px rgba(116, 60, 96, 0.16);
+  padding: 0.9rem;
+}
+
+.macadamia-alert-title {
+  color: #171717;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.macadamia-alert-progress {
+  background: #C470A7;
+}
