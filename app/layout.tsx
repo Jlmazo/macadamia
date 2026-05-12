@@ -18,6 +18,11 @@ export const metadata: Metadata = {
   title: "Macadamia | Tienda de Belleza y Cuidado Personal",
   description:
     "Descubre los mejores productos de belleza, cuidado capilar, maquillaje, cuidado corporal, tintes y accesorios. Productos 100% originales de las mejores marcas.",
+  icons: {
+    icon: "/Logo_Morado.png",
+    shortcut: "/Logo_Morado.png",
+    apple: "/Logo_Morado.png",
+  },
   keywords: [
     "belleza",
     "maquillaje",
