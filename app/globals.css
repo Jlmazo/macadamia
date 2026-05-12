@@ -37,6 +37,7 @@
   --animate-fade-in-delayed: fade-in 0.6s ease-out 0.2s forwards;
   --animate-bounce-slow: bounce-slow 2s infinite;
   --animate-float: float 3s ease-in-out infinite;
+  --animate-cart-attention: cart-attention 20s ease-in-out infinite;
 }
 
 @layer base {
@@ -80,6 +81,24 @@
   }
 }
 
+@keyframes cart-attention {
+  0%, 88%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  90% {
+    transform: translateY(-6px) scale(1.03);
+  }
+  92% {
+    transform: translateY(0) scale(1);
+  }
+  94% {
+    transform: translateY(-4px) scale(1.02);
+  }
+  96% {
+    transform: translateY(0) scale(1);
+  }
+}
+
 @layer utilities {
   .animate-fade-in {
     animation: fade-in 0.6s ease-out forwards;
@@ -96,5 +115,9 @@
   
   .animate-float {
     animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-cart-attention {
+    animation: cart-attention 20s ease-in-out infinite;
   }
 }

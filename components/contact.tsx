@@ -1,10 +1,14 @@
 "use client";
 
 import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
+import { contactInfo } from "@/lib/contact-info";
 
 export function Contact() {
   const handleWhatsApp = () => {
-    window.open("https://wa.me/573001234567?text=¡Hola! Quisiera más información sobre sus productos.", "_blank");
+    window.open(
+      contactInfo.whatsappUrl("¡Hola! Quisiera más información sobre sus productos."),
+      "_blank"
+    );
   };
 
   return (
@@ -24,13 +28,13 @@ export function Contact() {
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 hover:scale-105 transition-all duration-300 group">
             <Phone className="w-10 h-10 text-white mx-auto mb-4 group-hover:scale-110 transition-transform" />
             <h3 className="font-semibold text-white mb-2">Teléfono</h3>
-            <p className="text-white/80">+57 300 123 4567</p>
+            <p className="text-white/80">{contactInfo.phoneDisplay}</p>
           </div>
 
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 hover:scale-105 transition-all duration-300 group">
             <Mail className="w-10 h-10 text-white mx-auto mb-4 group-hover:scale-110 transition-transform" />
             <h3 className="font-semibold text-white mb-2">Email</h3>
-            <p className="text-white/80">info@macadamia.com</p>
+            <p className="text-white/80 break-all">{contactInfo.email}</p>
           </div>
 
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 hover:scale-105 transition-all duration-300 group">
@@ -46,7 +50,6 @@ export function Contact() {
           </div>
         </div>
 
-        {/* WhatsApp CTA */}
         <div className="text-center">
           <button
             onClick={handleWhatsApp}

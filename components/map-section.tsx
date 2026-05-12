@@ -1,6 +1,7 @@
 "use client";
 
 import { MapPin, Clock, Phone } from "lucide-react";
+import { contactInfo } from "@/lib/contact-info";
 
 export function MapSection() {
   return (
@@ -58,8 +59,8 @@ export function MapSection() {
                 <div>
                   <h3 className="font-semibold text-neutral-900 mb-1">Teléfono</h3>
                   <p className="text-neutral-600 text-sm">
-                    +57 300 123 4567<br />
-                    +57 601 234 5678
+                    {contactInfo.phoneDisplay}<br />
+                    {contactInfo.email}
                   </p>
                 </div>
               </div>

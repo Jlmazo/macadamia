@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { Search, ChevronDown } from "lucide-react";
-import { products, categories, getBrandsByCategory } from "@/lib/products";
+import { useMemo, useState } from "react";
+import { ChevronDown, Search } from "lucide-react";
+import { categories, getBrandsByCategory, products } from "@/lib/products";
 import { ProductCard } from "./product-card";
 
 export function Catalog() {
@@ -24,6 +24,7 @@ export function Catalog() {
         !searchTerm ||
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.brand.toLowerCase().includes(searchTerm.toLowerCase());
+
       return matchesCategory && matchesBrand && matchesSearch;
     });
   }, [activeCategory, activeBrand, searchTerm]);
@@ -39,35 +40,35 @@ export function Catalog() {
   };
 
   return (
-    <section id="catalogo" className="py-16 bg-neutral-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-3">
-            Nuestro <span className="text-[#C470A7]">Catálogo</span>
+    <section id="catalogo" className="bg-neutral-50 py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto mb-10 max-w-3xl text-center">
+          <span className="inline-flex rounded-full border border-[#ead6e4] bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#9d4c83] shadow-sm">
+            Seleccion Macadamia
+          </span>
+          <h2 className="mt-5 text-3xl font-black tracking-tight text-neutral-950 md:text-4xl">
+            Productos de belleza para tu rutina diaria
           </h2>
-          <p className="text-neutral-600 max-w-2xl mx-auto">
-            Encuentra los mejores productos de belleza para el cuidado de tu
-            cabello, piel y mucho más
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-neutral-600">
+            Explora productos originales para cabello, piel, maquillaje y
+            cuidado personal, seleccionados para comprar facil y con confianza.
           </p>
         </div>
 
-        {/* Search Bar */}
-        <div className="max-w-xl mx-auto mb-8">
-          <div className="relative group">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400 group-focus-within:text-[#C470A7] transition-colors" />
+        <div className="mx-auto mb-8 max-w-xl">
+          <div className="group relative">
+            <Search className="absolute left-4 top-1/2 size-5 -translate-y-1/2 text-neutral-400 transition-colors group-focus-within:text-[#C470A7]" />
             <input
               type="text"
               placeholder="Buscar productos..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C470A7] focus:border-transparent bg-white transition-all duration-300 hover:border-[#C470A7]/50"
+              onChange={(event) => setSearchTerm(event.target.value)}
+              className="w-full rounded-xl border border-neutral-200 bg-white py-3 pl-12 pr-4 transition-all duration-300 hover:border-[#C470A7]/50 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#C470A7]"
             />
           </div>
         </div>
 
-        {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
+        <div className="mb-8 flex flex-wrap justify-center gap-2">
           {categories.map((category) => (
             <button
               key={category}
@@ -76,10 +77,10 @@ export function Catalog() {
                 setActiveBrand(null);
                 setShowAllBrands(false);
               }}
-              className={`px-4 py-2 rounded-full font-medium transition-all duration-300 hover:scale-105 ${
+              className={`rounded-full px-4 py-2 font-medium transition-all duration-300 hover:scale-105 ${
                 activeCategory === category
                   ? "bg-[#C470A7] text-white shadow-md shadow-[#C470A7]/30"
-                  : "bg-white text-neutral-700 hover:bg-neutral-100 border border-neutral-200"
+                  : "border border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-100"
               }`}
             >
               {categoryLabels[category]}
@@ -87,16 +88,15 @@ export function Catalog() {
           ))}
         </div>
 
-        {/* Brand Filter */}
         {brands.length > 0 && (
           <div className="mb-8">
-            <div className="flex flex-wrap justify-center gap-2 mb-3">
+            <div className="mb-3 flex flex-wrap justify-center gap-2">
               <button
                 onClick={() => setActiveBrand(null)}
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-all duration-300 hover:scale-105 ${
                   !activeBrand
-                    ? "bg-[#C470A7]/20 text-[#C470A7] border border-[#C470A7]"
-                    : "bg-white text-neutral-600 hover:bg-neutral-100 border border-neutral-200"
+                    ? "border border-[#C470A7] bg-[#C470A7]/20 text-[#C470A7]"
+                    : "border border-neutral-200 bg-white text-neutral-600 hover:bg-neutral-100"
                 }`}
               >
                 Todas las marcas
@@ -105,25 +105,28 @@ export function Catalog() {
                 <button
                   key={brand}
                   onClick={() => setActiveBrand(brand)}
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                  className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-all duration-300 hover:scale-105 ${
                     activeBrand === brand
-                      ? "bg-[#C470A7]/20 text-[#C470A7] border border-[#C470A7]"
-                      : "bg-white text-neutral-600 hover:bg-neutral-100 border border-neutral-200"
+                      ? "border border-[#C470A7] bg-[#C470A7]/20 text-[#C470A7]"
+                      : "border border-neutral-200 bg-white text-neutral-600 hover:bg-neutral-100"
                   }`}
                 >
                   {brand}
                 </button>
               ))}
             </div>
+
             {brands.length > 6 && (
               <div className="text-center">
                 <button
                   onClick={() => setShowAllBrands(!showAllBrands)}
-                  className="text-sm text-[#C470A7] hover:underline flex items-center gap-1 mx-auto hover:scale-105 transition-transform"
+                  className="mx-auto flex items-center gap-1 text-sm text-[#C470A7] transition-transform hover:scale-105 hover:underline"
                 >
                   {showAllBrands ? "Ver menos" : `Ver todas (${brands.length})`}
                   <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-300 ${showAllBrands ? "rotate-180" : ""}`}
+                    className={`size-4 transition-transform duration-300 ${
+                      showAllBrands ? "rotate-180" : ""
+                    }`}
                   />
                 </button>
               </div>
@@ -131,13 +134,11 @@ export function Catalog() {
           </div>
         )}
 
-        {/* Products Count */}
-        <p className="text-center text-neutral-500 text-sm mb-6">
+        <p className="mb-6 text-center text-sm text-neutral-500">
           Mostrando {filteredProducts.length} productos
         </p>
 
-        {/* Products Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {filteredProducts.map((product, index) => (
             <div
               key={product.id}
@@ -150,12 +151,10 @@ export function Catalog() {
         </div>
 
         {filteredProducts.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-neutral-500 text-lg">
-              No se encontraron productos
-            </p>
-            <p className="text-neutral-400 text-sm mt-1">
-              Intenta con otra búsqueda o categoría
+          <div className="py-12 text-center">
+            <p className="text-lg text-neutral-500">No se encontraron productos</p>
+            <p className="mt-1 text-sm text-neutral-400">
+              Intenta con otra busqueda o categoria
             </p>
           </div>
         )}

@@ -36,7 +36,7 @@ export default function Home() {
       <MapSection />
       
       {/* Wave separator before footer */}
-      <WaveDivider color="#171717" bgColor="white" />
+      <WaveDivider color="#F7E7CE" bgColor="white" />
       
       <Footer />
       

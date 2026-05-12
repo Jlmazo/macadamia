@@ -3,6 +3,7 @@
 import { X, Plus, Minus, Trash2, ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { formatPrice } from "@/lib/products";
+import { contactInfo } from "@/lib/contact-info";
 
 export function CartDrawer() {
   const { items, isOpen, setIsOpen, updateQuantity, removeFromCart, totalPrice, clearCart } = useCart();
@@ -20,8 +21,7 @@ export function CartDrawer() {
       .join("\n");
 
     const message = `Hola! Me gustaría hacer un pedido:\n\n${orderText}\n\n*Total: ${formatPrice(totalPrice)}*`;
-    const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/573001234567?text=${encodedMessage}`, "_blank");
+    window.open(contactInfo.whatsappUrl(message), "_blank");
   };
 
   return (
