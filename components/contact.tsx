@@ -1,62 +1,93 @@
 "use client";
 
-import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
+import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { contactInfo } from "@/lib/contact-info";
+
+const contactCards = [
+  {
+    icon: Phone,
+    title: "Telefono",
+    value: contactInfo.phoneDisplay,
+    href: `tel:+57${contactInfo.phone}`,
+  },
+  {
+    icon: Mail,
+    title: "Email",
+    value: contactInfo.email,
+    href: `mailto:${contactInfo.email}`,
+  },
+  {
+    icon: MapPin,
+    title: "Ubicacion",
+    value: "Colombia",
+    href: "#ubicacion",
+  },
+  {
+    icon: Clock,
+    title: "Horario",
+    value: "Lun - Sab: 8am - 6pm",
+  },
+];
 
 export function Contact() {
   const handleWhatsApp = () => {
     window.open(
-      contactInfo.whatsappUrl("¡Hola! Quisiera más información sobre sus productos."),
+      contactInfo.whatsappUrl("Hola! Quisiera mas informacion sobre sus productos."),
       "_blank"
     );
   };
 
   return (
-    <section id="contacto" className="py-16 bg-[#C470A7]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
-            Contáctanos
+    <section id="contacto" className="relative overflow-hidden bg-[#C470A7] py-16 md:py-20">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.18),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.12),transparent_32%)]" />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-white/90">
+            Atencion personalizada
+          </span>
+          <h2 className="mt-5 text-3xl font-black tracking-tight text-white md:text-4xl">
+            Contactanos
           </h2>
-          <p className="text-white/80 max-w-2xl mx-auto">
-            Estamos aquí para ayudarte. Contáctanos por cualquiera de nuestros
-            canales y te responderemos lo antes posible.
+          <p className="mt-4 text-base leading-7 text-white/82">
+            Estamos aqui para ayudarte a elegir productos originales para tu
+            rutina de belleza y cuidado personal.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 hover:scale-105 transition-all duration-300 group">
-            <Phone className="w-10 h-10 text-white mx-auto mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="font-semibold text-white mb-2">Teléfono</h3>
-            <p className="text-white/80">{contactInfo.phoneDisplay}</p>
-          </div>
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {contactCards.map((item) => {
+            const CardTag = item.href ? "a" : "div";
+            const Icon = item.icon;
 
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 hover:scale-105 transition-all duration-300 group">
-            <Mail className="w-10 h-10 text-white mx-auto mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="font-semibold text-white mb-2">Email</h3>
-            <p className="text-white/80 break-all">{contactInfo.email}</p>
-          </div>
-
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 hover:scale-105 transition-all duration-300 group">
-            <MapPin className="w-10 h-10 text-white mx-auto mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="font-semibold text-white mb-2">Ubicación</h3>
-            <p className="text-white/80">Colombia</p>
-          </div>
-
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 hover:scale-105 transition-all duration-300 group">
-            <Clock className="w-10 h-10 text-white mx-auto mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="font-semibold text-white mb-2">Horario</h3>
-            <p className="text-white/80">Lun - Sáb: 8am - 6pm</p>
-          </div>
+            return (
+              <CardTag
+                key={item.title}
+                href={item.href}
+                className="group rounded-2xl border border-white/18 bg-white/[0.09] p-6 text-center shadow-[0_18px_44px_rgba(116,60,96,0.14)] backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-white/34 hover:bg-white/[0.14]"
+              >
+                <div className="mx-auto grid size-12 place-items-center rounded-2xl bg-white/12 text-white ring-1 ring-white/18 transition-all duration-300 group-hover:bg-white group-hover:text-[#C470A7]">
+                  <Icon className="size-6" />
+                </div>
+                <h3 className="mt-5 text-sm font-black uppercase tracking-[0.08em] text-white">
+                  {item.title}
+                </h3>
+                <p className="mx-auto mt-3 max-w-[14rem] text-sm font-semibold leading-6 text-white/82 break-words">
+                  {item.value}
+                </p>
+              </CardTag>
+            );
+          })}
         </div>
 
-        <div className="text-center">
+        <div className="mt-12 text-center">
           <button
             onClick={handleWhatsApp}
-            className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#20BD5A] text-white font-bold py-4 px-8 rounded-full transition-all duration-300 shadow-lg text-lg hover:scale-105 hover:shadow-xl"
+            className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-full bg-[#20C45A] px-8 py-4 text-base font-black text-white shadow-[0_18px_38px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#18B451] hover:shadow-[0_22px_45px_rgba(0,0,0,0.22)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/25"
           >
-            <MessageCircle className="w-6 h-6" />
-            Escríbenos por WhatsApp
+            <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/24 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+            <MessageCircle className="relative size-6 transition-transform duration-300 group-hover:scale-110" />
+            <span className="relative">Escribenos por WhatsApp</span>
           </button>
         </div>
       </div>

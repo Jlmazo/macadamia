@@ -1,7 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, MessageCircle, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  Gem,
+  Layers3,
+  MessageCircle,
+  PackageCheck,
+  Sparkles,
+} from "lucide-react";
+
+const stats = [
+  { value: "300+", label: "Productos", icon: PackageCheck },
+  { value: "50+", label: "Marcas", icon: Gem },
+  { value: "5", label: "Categorias", icon: Layers3 },
+  { value: "100%", label: "Originales", icon: BadgeCheck },
+];
 
 export function Hero() {
   return (
@@ -63,25 +78,27 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="border-y border-[#ead6e4] bg-[#C470A7]/5 py-7">
+      <div className="border-y border-[#ead6e4] bg-[#fbf7fa] py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            {[
-              ["300+", "Productos"],
-              ["50+", "Marcas"],
-              ["5", "Categorias"],
-              ["100%", "Originales"],
-            ].map(([value, label]) => (
+          <div className="grid overflow-hidden rounded-3xl border border-[#ead6e4] bg-white shadow-[0_18px_45px_rgba(116,60,96,0.08)] sm:grid-cols-2 lg:grid-cols-4">
+            {stats.map((stat, index) => (
               <div
-                key={label}
-                className="group rounded-2xl bg-white/70 px-4 py-4 text-center transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-[0_14px_30px_rgba(196,112,167,0.12)]"
+                key={stat.label}
+                className={`group relative flex items-center gap-4 border-b border-[#ead6e4] px-6 py-6 transition-colors duration-300 hover:bg-[#C470A7]/6 lg:border-b-0 ${
+                  index > 0 ? "lg:border-l" : ""
+                }`}
               >
-                <p className="text-3xl font-black text-[#C470A7] transition-transform duration-300 group-hover:scale-105 md:text-4xl">
-                  {value}
-                </p>
-                <p className="mt-1 text-sm font-semibold text-neutral-600">
-                  {label}
-                </p>
+                <div className="grid size-12 shrink-0 place-items-center rounded-2xl bg-[#C470A7]/10 text-[#C470A7] transition-all duration-300 group-hover:bg-[#C470A7] group-hover:text-white group-hover:shadow-[0_12px_24px_rgba(196,112,167,0.24)]">
+                  <stat.icon className="size-5" />
+                </div>
+                <div>
+                  <p className="text-3xl font-black leading-none text-[#C470A7] md:text-4xl">
+                    {stat.value}
+                  </p>
+                  <p className="mt-1 text-sm font-bold text-neutral-700">
+                    {stat.label}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
